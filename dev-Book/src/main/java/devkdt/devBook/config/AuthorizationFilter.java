@@ -21,21 +21,21 @@ public class AuthorizationFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         String requestURI = httpRequest.getRequestURI();
 
-        log.info("### 인가 필터 실행! = {}", requestURI);
-
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
         if (isAdminAuthorizationCheckPath(requestURI)) {
             log.info("###AuthorizationFilterURI 확인 => {}", requestURI);
             HttpSession httpSession = httpRequest.getSession(false);
-            Member loginMember = (Member) httpSession.getAttribute("loginMember");
+            if (httpSession == null) {
+
+            }
+            Member loginMember = (Member) httpSession.getAttribute("loginUser");
             if (loginMember.getAuthority() != Authority.ADMIN) { //로그인 멤버의 권한이 admin이 아닐시 403 응답.
                 log.info("###AuthorizationFilter실패");
                 httpResponse.setStatus(403);
                 return;
             }
         }
-        log.info("###AuthorizationFilter 통과 또는 관련없는 URI");
         chain.doFilter(request, response);
     }
 
