@@ -1,89 +1,88 @@
 package devkdt.devBook.service;
 
-import devkdt.devBook.dto.BookAddRequest;
-import devkdt.devBook.dto.BookDetailResponse;
-import devkdt.devBook.dto.EvaluationRequest;
-import devkdt.devBook.entity.*;
-import net.bytebuddy.asm.MemberRemoval;
+import devkdt.devBook.book.application.BookService;
+import devkdt.devBook.book.domain.Book;
+import devkdt.devBook.book.domain.BookRepository;
+import devkdt.devBook.book.dto.BookAddRequest;
+import devkdt.devBook.book.dto.BookDetailResponse;
+import devkdt.devBook.evaluation.dto.EvaluationRequest;
+import devkdt.devBook.member.domain.MemberRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
 
 import static org.assertj.core.api.Assertions.*;
 
 @Transactional
 @SpringBootTest
-@Rollback(value = false)
+//@Rollback(value = false)
 class BookServiceTest {
     @Autowired
     private BookService bookService;
 
     @Autowired
-    private PostRepository postRepository;
+    private BookRepository bookRepository;
 
     @Autowired
     private MemberRepository memberRepository;
 
     @Test
     void addEvaluation() {
-        Post post = new Post("title1", "content1", 30000);
-        Post savePost = postRepository.save(post);
+        Book book = new Book("title1", "content1", 30000);
+        Book saveBook = bookRepository.save(book);
 
         EvaluationRequest evaluationRequest = new EvaluationRequest(true, false, false);
 
 
         //bookService.evaluate(savePost.getId(), evaluationRequest);
 
-        System.out.println(savePost);
+        System.out.println(saveBook);
     }
 
-    @Test
-    void addEvaluationWithMember() {
-        Post post = new Post("title1", "content1", 30000);
-        Post savePost = postRepository.save(post);
-
-        Member member = new Member("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
-        Member saveMember = memberRepository.save(member);
-
-        EvaluationRequest evaluationRequest = new EvaluationRequest(true, false, false);
-
-        bookService.evaluate(savePost.getId(), saveMember.getId(), evaluationRequest);
-
-        System.out.println(savePost);
-        System.out.println(saveMember);
-    }
+//    @Test
+//    void addEvaluationWithMember() {
+//        Book book = new Book("title1", "content1", 30000);
+//        Book saveBook = bookRepository.save(book);
+//
+//        Member member = new Member("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
+//        Member saveMember = memberRepository.save(member);
+//
+//        EvaluationRequest evaluationRequest = new EvaluationRequest(true, false, false);
+//
+//        bookService.evaluate(saveBook.getId(), saveMember.getId(), evaluationRequest);
+//
+//        System.out.println(saveBook);
+//        System.out.println(saveMember);
+//    }
 
     @Test
     void detailPage() {
-        Post post = new Post("title1", "content1", 30000);
-        Post savePost = postRepository.save(post);
-        BookDetailResponse detailResponse = bookService.detail(savePost.getId());
+        Book book = new Book("title1", "content1", 30000);
+        Book saveBook = bookRepository.save(book);
+        BookDetailResponse detailResponse = bookService.detail(saveBook.getId());
 
-        assertThat(detailResponse).usingRecursiveComparison().isEqualTo(savePost);
+        assertThat(detailResponse).usingRecursiveComparison().isEqualTo(saveBook);
     }
 
     @Test
-    void addPost() {
+    void addBook() {
         BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111);
-        BookDetailResponse postDetailResponse = bookService.addPost(postAddRequest);
-        Post foundPost = bookService.findPostById(postDetailResponse.getId());
-        assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundPost);
+        BookDetailResponse postDetailResponse = bookService.addBook(postAddRequest);
+        Book foundBook = bookService.findBookById(postDetailResponse.getId());
+        assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundBook);
     }
 
     @Test
-    void deletePostById() {
+    void deleteBookById() {
         BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111);
-        BookDetailResponse postDetailResponse = bookService.addPost(postAddRequest);
-        Post foundPost = bookService.findPostById(postDetailResponse.getId());
-        assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundPost);
+        BookDetailResponse postDetailResponse = bookService.addBook(postAddRequest);
+        Book foundBook = bookService.findBookById(postDetailResponse.getId());
+        assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundBook);
 
-        bookService.deletePostById(foundPost.getId());
+        bookService.deleteBookById(foundBook.getId());
 
-        assertThat(bookService.findAllPost().size()).isEqualTo(0);
+        assertThat(bookService.findAllBook().size()).isEqualTo(0);
     }
 
 

@@ -1,9 +1,8 @@
 package devkdt.devBook.entity;
 
+import devkdt.devBook.member.domain.Authority;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class AuthorityTest {
 
