@@ -4,14 +4,15 @@ import lombok.Data;
 
 @Data
 public class LoginRequest {
-    private String slackId;
-    private String password;
 
-    public LoginRequest() {
-    }
+  private String slackId;
+  private String password;
 
-    public LoginRequest(String slackId, String password) {
-        this.slackId = slackId;
-        this.password = password;
-    }
+  public LoginRequest() {
+  }
+
+  public LoginRequest(String slackId, String password) {
+    this.slackId = slackId;
+    this.password = password;
+  }
 }

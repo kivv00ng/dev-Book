@@ -3,8 +3,7 @@ package devkdt.devBook.service;
 import devkdt.devBook.book.application.BookService;
 import devkdt.devBook.book.domain.Book;
 import devkdt.devBook.book.domain.BookRepository;
-import devkdt.devBook.book.dto.BookAddRequest;
-import devkdt.devBook.book.dto.BookDetailResponse;
+import devkdt.devBook.book.dto.BookResponse;
 import devkdt.devBook.evaluation.dto.EvaluationRequest;
 import devkdt.devBook.member.domain.MemberRepository;
 import org.junit.jupiter.api.Test;
@@ -18,27 +17,27 @@ import static org.assertj.core.api.Assertions.*;
 @SpringBootTest
 //@Rollback(value = false)
 class BookServiceTest {
-    @Autowired
-    private BookService bookService;
 
-    @Autowired
-    private BookRepository bookRepository;
+  @Autowired
+  private BookService bookService;
 
-    @Autowired
-    private MemberRepository memberRepository;
+  @Autowired
+  private BookRepository bookRepository;
 
-    @Test
-    void addEvaluation() {
-        Book book = new Book("title1", "content1", 30000);
-        Book saveBook = bookRepository.save(book);
+  @Autowired
+  private MemberRepository memberRepository;
 
-        EvaluationRequest evaluationRequest = new EvaluationRequest(true, false, false);
+  @Test
+  void addEvaluation() {
+    Book book = new Book("title1", "content1", 30000);
+    Book saveBook = bookRepository.save(book);
 
+    EvaluationRequest evaluationRequest = new EvaluationRequest(true, false, false);
 
-        //bookService.evaluate(savePost.getId(), evaluationRequest);
+    //bookService.evaluate(savePost.getId(), evaluationRequest);
 
-        System.out.println(saveBook);
-    }
+    System.out.println(saveBook);
+  }
 
 //    @Test
 //    void addEvaluationWithMember() {
@@ -56,34 +55,34 @@ class BookServiceTest {
 //        System.out.println(saveMember);
 //    }
 
-    @Test
-    void detailPage() {
-        Book book = new Book("title1", "content1", 30000);
-        Book saveBook = bookRepository.save(book);
-        BookDetailResponse detailResponse = bookService.detail(saveBook.getId());
+  @Test
+  void detailPage() {
+    Book book = new Book("title1", "content1", 30000);
+    Book saveBook = bookRepository.save(book);
+    BookResponse detailResponse = bookService.detail(saveBook.getId());
 
-        assertThat(detailResponse).usingRecursiveComparison().isEqualTo(saveBook);
-    }
+    assertThat(detailResponse).usingRecursiveComparison().isEqualTo(saveBook);
+  }
 
-    @Test
-    void addBook() {
-        BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111);
-        BookDetailResponse postDetailResponse = bookService.addBook(postAddRequest);
-        Book foundBook = bookService.findBookById(postDetailResponse.getId());
-        assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundBook);
-    }
+  @Test
+  void addBook() {
+    BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111);
+    BookResponse postDetailResponse = bookService.addBook(postAddRequest);
+    Book foundBook = bookService.findBookById(postDetailResponse.getId());
+    assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundBook);
+  }
 
-    @Test
-    void deleteBookById() {
-        BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111);
-        BookDetailResponse postDetailResponse = bookService.addBook(postAddRequest);
-        Book foundBook = bookService.findBookById(postDetailResponse.getId());
-        assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundBook);
+  @Test
+  void deleteBookById() {
+    BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111);
+    BookResponse postDetailResponse = bookService.addBook(postAddRequest);
+    Book foundBook = bookService.findBookById(postDetailResponse.getId());
+    assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundBook);
 
-        bookService.deleteBookById(foundBook.getId());
+    bookService.deleteBookById(foundBook.getId());
 
-        assertThat(bookService.findAllBook().size()).isEqualTo(0);
-    }
+    assertThat(bookService.findAllBook().size()).isEqualTo(0);
+  }
 
 
 }

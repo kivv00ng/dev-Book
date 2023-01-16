@@ -8,7 +8,8 @@ import java.util.Optional;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
 
-    @Query("select m from Member m where m.slackId = :slackId and m.password = :password")
-    Optional<Member> findMemberForLogin(@Param("slackId") String slackId, @Param("password") String password);
+  @Query("select m from Member m where m.slackId = :slackId and m.password = :password")
+  Optional<Member> findMemberForLogin(@Param("slackId") String slackId,
+      @Param("password") String password);
 
 }

@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test;
 
 class AuthorityTest {
 
-    @Test
-    void selectAuthority() {
-        Authority admin = Authority.selectAuthority("admin");
-        Authority mentor = Authority.selectAuthority("mentor");
-        Authority graduate = Authority.selectAuthority("graduate");
+  @Test
+  void selectAuthority() {
+    Authority admin = Authority.selectAuthority("admin");
+    Authority mentor = Authority.selectAuthority("mentor");
+    Authority graduate = Authority.selectAuthority("graduate");
 
-        Assertions.assertThat(admin).isEqualTo(Authority.ADMIN);
-        Assertions.assertThat(mentor).isEqualTo(Authority.MENTOR);
-        Assertions.assertThat(graduate).isEqualTo(Authority.GRADUATE);
+    Assertions.assertThat(admin).isEqualTo(Authority.ADMIN);
+    Assertions.assertThat(mentor).isEqualTo(Authority.MENTOR);
+    Assertions.assertThat(graduate).isEqualTo(Authority.GRADUATE);
 
-    }
+  }
 
 }

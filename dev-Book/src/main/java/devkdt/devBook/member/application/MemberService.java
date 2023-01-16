@@ -20,22 +20,23 @@ import java.util.Optional;
 @Service
 public class MemberService {
 
-    private final MemberRepository memberRepository;
+  private final MemberRepository memberRepository;
 
-    public Member login(LoginRequest loginRequest) {
-        Optional<Member> loginMember = memberRepository.findMemberForLogin(loginRequest.getSlackId(), loginRequest.getPassword());
-        return loginMember.orElseThrow(() -> new NotFoundLoginMemberException());
-    }
+  public Member login(LoginRequest loginRequest) {
+    Optional<Member> loginMember = memberRepository.findMemberForLogin(loginRequest.getSlackId(),
+        loginRequest.getPassword());
+    return loginMember.orElseThrow(() -> new NotFoundLoginMemberException());
+  }
 
-    @Transactional
-    public MemberJoinResponse save(Member member) {
-        Member saveMember = memberRepository.save(member);
-        return new MemberJoinResponse(saveMember);
-    }
+  @Transactional
+  public MemberJoinResponse save(Member member) {
+    Member saveMember = memberRepository.save(member);
+    return new MemberJoinResponse(saveMember);
+  }
 
-    @Transactional
-    public MemberJoinResponse approveJoin(TemporaryMember temporaryMember) {
-        Member saveMember = memberRepository.save(temporaryMember.toMember());
-        return new MemberJoinResponse(saveMember);
-    }
+  @Transactional
+  public MemberJoinResponse approveJoin(TemporaryMember temporaryMember) {
+    Member saveMember = memberRepository.save(temporaryMember.toMember());
+    return new MemberJoinResponse(saveMember);
+  }
 }

@@ -20,62 +20,67 @@ import java.util.Optional;
 @Rollback(value = false)
 class JoinRequestServiceTest {
 
-    @Autowired
-    private JoinRequestService joinRequestService;
+  @Autowired
+  private JoinRequestService joinRequestService;
 
-    @Autowired
-    JoinRequestRepository joinRequestRepository;
+  @Autowired
+  JoinRequestRepository joinRequestRepository;
 
 
-    @Test
-    void saveTest() {
-        TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
-        JoinRequest joinRequest = joinRequestService.save(temporaryMember);
+  @Test
+  void saveTest() {
+    TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234",
+        "slackNickName1", "010-1234-1234", Authority.ADMIN);
+    JoinRequest joinRequest = joinRequestService.save(temporaryMember);
 
-        JoinRequest foundJoinRequest = joinRequestRepository.findById(joinRequest.getId()).get();
+    JoinRequest foundJoinRequest = joinRequestRepository.findById(joinRequest.getId()).get();
 
-        Assertions.assertThat(joinRequest).usingRecursiveComparison().isEqualTo(foundJoinRequest);
-    }
+    Assertions.assertThat(joinRequest).usingRecursiveComparison().isEqualTo(foundJoinRequest);
+  }
 
-    @Test
-    void saveWithSlackApiTest() {
-        TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
-        JoinRequest joinRequest = joinRequestService.save(temporaryMember);
+  @Test
+  void saveWithSlackApiTest() {
+    TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234",
+        "slackNickName1", "010-1234-1234", Authority.ADMIN);
+    JoinRequest joinRequest = joinRequestService.save(temporaryMember);
 
-        JoinRequest foundJoinRequest = joinRequestRepository.findById(joinRequest.getId()).get();
+    JoinRequest foundJoinRequest = joinRequestRepository.findById(joinRequest.getId()).get();
 
-        Assertions.assertThat(joinRequest).usingRecursiveComparison().isEqualTo(foundJoinRequest);
-    }
+    Assertions.assertThat(joinRequest).usingRecursiveComparison().isEqualTo(foundJoinRequest);
+  }
 
-    @Test
-    void deleteTest() {
-        TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
-        JoinRequest joinRequest = joinRequestService.save(temporaryMember);
-        JoinRequest foundJoinRequest = joinRequestRepository.findById(joinRequest.getId()).get();
-        Assertions.assertThat(joinRequest).usingRecursiveComparison().isEqualTo(foundJoinRequest);
+  @Test
+  void deleteTest() {
+    TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234",
+        "slackNickName1", "010-1234-1234", Authority.ADMIN);
+    JoinRequest joinRequest = joinRequestService.save(temporaryMember);
+    JoinRequest foundJoinRequest = joinRequestRepository.findById(joinRequest.getId()).get();
+    Assertions.assertThat(joinRequest).usingRecursiveComparison().isEqualTo(foundJoinRequest);
 
-        joinRequestService.delete(foundJoinRequest.getId());
+    joinRequestService.delete(foundJoinRequest.getId());
 
-        Optional<JoinRequest> deleteResult = joinRequestRepository.findById(joinRequest.getId());
-        Assertions.assertThat(deleteResult.isEmpty()).isTrue();
-    }
+    Optional<JoinRequest> deleteResult = joinRequestRepository.findById(joinRequest.getId());
+    Assertions.assertThat(deleteResult.isEmpty()).isTrue();
+  }
 
-    @Test
-    void findOnePageJoinRequestTest() {
-        joinRequestRepository.deleteAll();
+  @Test
+  void findOnePageJoinRequestTest() {
+    joinRequestRepository.deleteAll();
 
-        TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
-        JoinRequest joinRequest1 = joinRequestService.save(temporaryMember);
-        JoinRequest joinRequest2 = joinRequestService.save(temporaryMember);
-        JoinRequest joinRequest3 = joinRequestService.save(temporaryMember);
-        JoinRequest joinRequest4 = joinRequestService.save(temporaryMember);
-        JoinRequest joinRequest5 = joinRequestService.save(temporaryMember);
+    TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234",
+        "slackNickName1", "010-1234-1234", Authority.ADMIN);
+    JoinRequest joinRequest1 = joinRequestService.save(temporaryMember);
+    JoinRequest joinRequest2 = joinRequestService.save(temporaryMember);
+    JoinRequest joinRequest3 = joinRequestService.save(temporaryMember);
+    JoinRequest joinRequest4 = joinRequestService.save(temporaryMember);
+    JoinRequest joinRequest5 = joinRequestService.save(temporaryMember);
 
-        JoinRequestOnePage joinRequestOnePage = joinRequestService.findOnePageJoinRequest(0);
+    JoinRequestOnePage joinRequestOnePage = joinRequestService.findOnePageJoinRequest(0);
 
-        Assertions.assertThat(joinRequestOnePage.getAllPage()).isEqualTo(1);
-        Assertions.assertThat(joinRequestOnePage.getAllContent()).isEqualTo(5);
-        Assertions.assertThat(joinRequestOnePage.getJoinRequests()).contains(joinRequest1, joinRequest2, joinRequest3, joinRequest4, joinRequest5);
-    }
+    Assertions.assertThat(joinRequestOnePage.getAllPage()).isEqualTo(1);
+    Assertions.assertThat(joinRequestOnePage.getAllContent()).isEqualTo(5);
+    Assertions.assertThat(joinRequestOnePage.getJoinRequests())
+        .contains(joinRequest1, joinRequest2, joinRequest3, joinRequest4, joinRequest5);
+  }
 
 }

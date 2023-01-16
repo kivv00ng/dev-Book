@@ -4,8 +4,8 @@ import devkdt.devBook.book.domain.Book;
 import lombok.Data;
 
 @Data
-public class BookDetailResponse {
-    private Long id;
+public class BookResponse {
+    private Long bookId;
     private String title;
     private String summary;
     private int price;
@@ -15,8 +15,8 @@ public class BookDetailResponse {
     private int middle;
 
 
-    public BookDetailResponse(Book book) {
-        this.id = book.getId();
+    public BookResponse(Book book) {
+        this.bookId = book.getBookId();
         this.title = book.getTitle();
         this.summary = book.getSummary();
         this.price = book.getPrice();

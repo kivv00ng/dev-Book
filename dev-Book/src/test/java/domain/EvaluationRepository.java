@@ -1,4 +1,4 @@
-package devkdt.devBook.evaluation.domain;
+package domain;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

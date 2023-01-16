@@ -2,11 +2,7 @@ package devkdt.devBook.book.application;
 
 import devkdt.devBook.book.domain.Book;
 import devkdt.devBook.book.domain.BookRepository;
-import devkdt.devBook.book.dto.BookAddRequest;
-import devkdt.devBook.book.dto.BookDetailResponse;
-import devkdt.devBook.book.dto.BookForPage;
-import devkdt.devBook.book.dto.BookOnePage;
-import devkdt.devBook.book.entity.*;
+import devkdt.devBook.book.dto.*;
 import devkdt.devBook.evaluation.domain.Evaluation;
 import devkdt.devBook.evaluation.domain.EvaluationRepository;
 import devkdt.devBook.evaluation.dto.EvaluationRequest;
@@ -28,10 +24,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class BookService {
 
-    private final BookRepository bookRepository;
-    private final EvaluationRepository evaluationRepository;
-    private final MemberRepository memberRepository;
-
+  private final BookRepository bookRepository;
+  private final EvaluationRepository evaluationRepository;
+  private final MemberRepository memberRepository;
 
 //    @Transactional
 //    public void evaluateV0(Long bookId, EvaluationRequest evaluationRequest) {
@@ -42,58 +37,62 @@ public class BookService {
 //        evaluationRepository.save(evaluation);
 //    }
 
-    @Transactional
-    public void evaluate(Long bookId, Long memberId, EvaluationRequest evaluationRequest) {
-        Book book = bookRepository.findById(bookId).orElseThrow(() -> new NotFoundByIdBookException(bookId));
+  @Transactional
+  public void evaluate(Long bookId, Long memberId, EvaluationRequest evaluationRequest) {
+    Book book = bookRepository.findById(bookId)
+        .orElseThrow(() -> new NotFoundByIdBookException(bookId));
 
-        Member member = memberRepository.findById(memberId).orElseThrow(() -> new NotFoundByIdMemberException(memberId));
+    Member member = memberRepository.findById(memberId)
+        .orElseThrow(() -> new NotFoundByIdMemberException(memberId));
 
-        applyEvaluation(book, evaluationRequest);
-        Evaluation evaluation = new Evaluation();
+    applyEvaluation(book, evaluationRequest);
+    Evaluation evaluation = new Evaluation();
 
-        evaluation.addEvaluation(book, member);
-        evaluationRepository.save(evaluation);
-    }
+    evaluation.addEvaluation(book, member);
+    evaluationRepository.save(evaluation);
+  }
 
-    public BookDetailResponse detail(Long bookId) {
-        Book foundBook = bookRepository.findById(bookId).orElseThrow(() -> new NotFoundByIdBookException(bookId));
-        return new BookDetailResponse(foundBook);
-    }
+  public BookResponse detail(Long bookId) {
+    Book foundBook = bookRepository.findById(bookId)
+        .orElseThrow(() -> new NotFoundByIdBookException(bookId));
+    return new BookResponse(foundBook);
+  }
 
-    private void applyEvaluation(Book book, EvaluationRequest evaluationRequest) {
-        evaluationRequest.addEvaluation(book);
-    }
+  private void applyEvaluation(Book book, EvaluationRequest evaluationRequest) {
+    evaluationRequest.addEvaluation(book);
+  }
 
-    @Transactional
-    public BookDetailResponse addBook(BookAddRequest addbookRequest) {
-        Book saveBook = bookRepository.save(addbookRequest.toBook());
-        return new BookDetailResponse(saveBook);
-    }
+  @Transactional
+  public BookResponse addBook(BookAddRequest bookAddRequest) {
+    Book saveBook = bookRepository.save(bookAddRequest.toBook());
+    return new BookResponse(saveBook);
+  }
 
-    public Book findBookById(Long bookId) {
-        return bookRepository.findById(bookId).orElseThrow(() -> new NotFoundByIdBookException(bookId));
-    }
+  public BookResponse findBookById(Long bookId) {
+    Book book = bookRepository.findById(bookId)
+        .orElseThrow(() -> new NotFoundByIdBookException(bookId));
+    return new BookResponse(book);
+  }
 
-    public void deleteBookById(Long bookId) {
-        bookRepository.deleteById(bookId);
-    }
+  public void deleteBookById(Long bookId) {
+    bookRepository.deleteById(bookId);
+  }
 
-    public List<Book> findAllBook() {
-        return bookRepository.findAll();
-    }
+  public List<Book> findAllBook() {
+    return bookRepository.findAll();
+  }
 
+  public BookOnePage findOnePageBook(int pageNumber) {
+    PageRequest pageRequest = PageRequest.of(pageNumber, 10);
 
-    public BookOnePage findOnePageBook(int pageNumber) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, 10);
+    Page<Book> books = bookRepository.findBookPage(pageRequest);
 
-        Page<Book> books = bookRepository.findBookPage(pageRequest);
+    List<BookForPage> bookForPages = books.stream()
+        .map(book -> new BookForPage(book.getBookId(), book.getTitle()))
+        .collect(Collectors.toList());
+    int bookCount = bookForPages.size();
+    int allPageCount = books.getTotalPages();
 
-        List<BookForPage> bookForPages = books.stream()
-                .map(book -> new BookForPage(book.getId(), book.getTitle()))
-                .collect(Collectors.toList());
-        int bookCount = bookForPages.size();
-        int allPageCount = books.getTotalPages();
-
-        return new BookOnePage(bookCount, allPageCount, bookForPages);
-    }
+    return new BookOnePage(bookCount, allPageCount, bookForPages);
+  }
 }

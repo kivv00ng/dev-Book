@@ -1,6 +1,5 @@
 package devkdt.devBook.joinRequest.application;
 
-import devkdt.devBook.global.SlackService;
 import devkdt.devBook.joinRequest.domain.JoinRequest;
 import devkdt.devBook.joinRequest.domain.JoinRequestRepository;
 import devkdt.devBook.joinRequest.domain.TemporaryMember;

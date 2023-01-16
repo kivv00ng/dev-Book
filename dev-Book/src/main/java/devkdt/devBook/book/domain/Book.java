@@ -12,7 +12,7 @@ public class Book {
     @Id
     @GeneratedValue
     @Column(name = "book_id")
-    private Long id;
+    private Long bookId;
 
     @OneToMany(mappedBy = "book")
     private List<Evaluation> evaluations = new ArrayList<>();
@@ -46,8 +46,8 @@ public class Book {
         this.middle = middle;
     }
 
-    public Long getId() {
-        return id;
+    public Long getBookId() {
+        return bookId;
     }
 
     public List<Evaluation> getEvaluations() {

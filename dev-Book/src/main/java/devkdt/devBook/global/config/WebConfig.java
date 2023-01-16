@@ -5,13 +5,28 @@ import devkdt.devBook.global.filter.LoginFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import javax.servlet.Filter;
 
-@Configuration
+//@EnableWebMvc
+//@Configuration
 public class WebConfig {
 
-    @Bean
+
+    //@Bean
+    public ViewResolver getViewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        //resolver.setPrefix("/templates/");
+        resolver.setSuffix(".html");
+        return resolver;
+    }
+
+    //@Bean
     public FilterRegistrationBean loginFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<Filter>();
 
@@ -21,7 +36,7 @@ public class WebConfig {
         return filterRegistrationBean;
     }
 
-    @Bean
+    //@Bean
     public FilterRegistrationBean authorizationFilter() {
         FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<Filter>();
 

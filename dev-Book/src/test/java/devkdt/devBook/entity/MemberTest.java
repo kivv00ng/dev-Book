@@ -19,36 +19,40 @@ import static org.assertj.core.api.Assertions.*;
 @Rollback(value = false)
 public class MemberTest {
 
-    @Autowired
-    private MemberRepository memberRepository;
+  @Autowired
+  private MemberRepository memberRepository;
 
-    private String regExpPhone = "010-\\d{4}-\\d{4}";
+  private String regExpPhone = "010-\\d{4}-\\d{4}";
 
-    @Test
-    void validate() {
-        String inputString = "010-1234-1234";
-        boolean check = Pattern.matches(regExpPhone, inputString);
-        System.out.println(check);
+  @Test
+  void validate() {
+    String inputString = "010-1234-1234";
+    boolean check = Pattern.matches(regExpPhone, inputString);
+    System.out.println(check);
 
-        new Member("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
-    }
+    new Member("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
+  }
 
-    @Test
-    void login() {
-        Member member = new Member("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234", Authority.ADMIN);
-        memberRepository.save(member);
-        Optional<Member> loginResult = memberRepository.findMemberForLogin(member.getSlackId(), member.getPassword());
-        Optional<Member> loginFailResult1 = memberRepository.findMemberForLogin("zzzz", member.getPassword());
-        Optional<Member> loginFailResult2 = memberRepository.findMemberForLogin(member.getSlackId(), "zzzz");
+  @Test
+  void login() {
+    Member member = new Member("name1", "slackId1", "1234", "slackNickName1", "010-1234-1234",
+        Authority.ADMIN);
+    memberRepository.save(member);
+    Optional<Member> loginResult = memberRepository.findMemberForLogin(member.getSlackId(),
+        member.getPassword());
+    Optional<Member> loginFailResult1 = memberRepository.findMemberForLogin("zzzz",
+        member.getPassword());
+    Optional<Member> loginFailResult2 = memberRepository.findMemberForLogin(member.getSlackId(),
+        "zzzz");
 
-        assertThat(loginResult.isPresent()).isTrue();
-        assertThat(loginFailResult1.isPresent()).isFalse();
-        assertThat(loginFailResult2.isPresent()).isFalse();
-    }
+    assertThat(loginResult.isPresent()).isTrue();
+    assertThat(loginFailResult1.isPresent()).isFalse();
+    assertThat(loginFailResult2.isPresent()).isFalse();
+  }
 
-    @Test
-    void approveTest() {
+  @Test
+  void approveTest() {
 
-    }
+  }
 
 }

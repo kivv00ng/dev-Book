@@ -1,4 +1,4 @@
-package devkdt.devBook.global;
+package devkdt.devBook.joinRequest.application;
 
 import com.slack.api.Slack;
 import com.slack.api.methods.MethodsClient;
