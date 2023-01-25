@@ -3,7 +3,7 @@ package devkdt.devBook.joinRequest.domain;
 import devkdt.devBook.member.domain.Authority;
 import devkdt.devBook.member.domain.Member;
 
-import javax.persistence.Embeddable;
+import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class TemporaryMember {

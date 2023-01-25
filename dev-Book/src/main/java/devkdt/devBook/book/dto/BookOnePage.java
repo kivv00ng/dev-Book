@@ -6,13 +6,14 @@ import java.util.List;
 
 @Data
 public class BookOnePage {
-    private int allContent;
-    private int allPage;
-    private List<BookForPage> pagePosts;
 
-    public BookOnePage(int allContent, int allPage, List<BookForPage> pagePosts) {
-        this.allContent = allContent;
-        this.allPage = allPage;
-        this.pagePosts = pagePosts;
-    }
+  private int allContentCount;
+  private int allPageCount;
+  private List<BookForPage> pagePosts;
+
+  public BookOnePage(int allContentCount, int allPageCount, List<BookForPage> pagePosts) {
+    this.allContentCount = allContentCount;
+    this.allPageCount = allPageCount;
+    this.pagePosts = pagePosts;
+  }
 }

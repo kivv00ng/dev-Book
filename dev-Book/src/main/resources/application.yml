@@ -4,13 +4,22 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: org.h2.Driver
+
   jpa:
     hibernate: #구현체 하이버네이트!
-      ddl-auto: create #처음 생성할 때 모든게 create되도록! (공부할때만 사용ㅎㅎ)
+      ddl-auto: update #처음 생성할 때 모든게 create되도록! (공부할때만 사용ㅎㅎ)
     properties:
       hibernate:
         #show_sql: true #jpa가 실행하는 쿼리를 전부 콘솔에 띄움 => 우리는 아래의 로그파일에 남기도록함..
         format_sql: true #쿼리가 한줄로 나오는게 아니라 이쁜 형식으로 나옴!
+  web:
+    resources:
+      add-mappings: true
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+
 logging.level:
   org.hibernate.SQL: debug
   # org.hibernate.type: trace #파라미터 바인딩된 파라미터까지 나오도록 하는 옵션..강의에서는 지저분해서 사용안했다고함(영한)

@@ -2,12 +2,12 @@ package devkdt.devBook.book.dto;
 
 import devkdt.devBook.book.domain.Book;
 import lombok.Getter;
-import lombok.Setter;
 
 @Getter
-@Setter
-public class BookAddRequest {
 
+public class BookUpdateRequest {
+
+  private Long bookId;
   private String title;
   private String summary;
   private int price;
@@ -16,10 +16,10 @@ public class BookAddRequest {
   private int junior;
   private int middle;
 
-  public BookAddRequest() {
+  public BookUpdateRequest() {
   }
 
-  public BookAddRequest(String title, String summary, int price, int devCourse, int junior,
+  public BookUpdateRequest(String title, String summary, int price, int devCourse, int junior,
       int middle) {
     this.title = title;
     this.summary = summary;
@@ -32,4 +32,5 @@ public class BookAddRequest {
   public Book toBook() {
     return new Book(this.title, this.summary, this.price, this.devCourse, this.junior, this.middle);
   }
+
 }

@@ -1,38 +1,42 @@
 package devkdt.devBook.joinRequest.domain;
 
-import javax.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class JoinRequest {
 
-    @Id
-    @GeneratedValue
-    @Column(name = "join_id")
-    private Long id;
+  @Id
+  @GeneratedValue
+  @Column(name = "join_id")
+  private Long id;
 
-    @Embedded
-    private TemporaryMember temporaryMember;
+  @Embedded
+  private TemporaryMember temporaryMember;
 
-    public Long getId() {
-        return id;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    protected JoinRequest() {
-    }
+  protected JoinRequest() {
+  }
 
-    public TemporaryMember getTemporaryMember() {
-        return temporaryMember;
-    }
+  public TemporaryMember getTemporaryMember() {
+    return temporaryMember;
+  }
 
-    public JoinRequest(TemporaryMember temporaryMember) {
-        this.temporaryMember = temporaryMember;
-    }
+  public JoinRequest(TemporaryMember temporaryMember) {
+    this.temporaryMember = temporaryMember;
+  }
 
-    @Override
-    public String toString() {
-        return "JoinRequest{" +
-                "id=" + id +
-                ", temporaryMember=" + temporaryMember +
-                '}';
-    }
+  @Override
+  public String toString() {
+    return "JoinRequest{" +
+        "id=" + id +
+        ", temporaryMember=" + temporaryMember +
+        '}';
+  }
 }

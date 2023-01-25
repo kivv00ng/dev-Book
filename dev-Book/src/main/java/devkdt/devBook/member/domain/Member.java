@@ -2,17 +2,17 @@ package devkdt.devBook.member.domain;
 
 import devkdt.devBook.evaluation.domain.Evaluation;
 import devkdt.devBook.member.exception.WrongPhoneNumberException;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Transient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

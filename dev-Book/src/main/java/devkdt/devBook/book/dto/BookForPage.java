@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class BookForPage {
 
-    private Long postId;
-    private String title;
+  private Long bookId;
+  private String title;
 
-    public BookForPage() {
-    }
+  public BookForPage() {
+  }
 
-    public BookForPage(Long postId, String title) {
-        this.postId = postId;
-        this.title = title;
-    }
+  public BookForPage(Long bookId, String title) {
+    this.bookId = bookId;
+    this.title = title;
+  }
 }

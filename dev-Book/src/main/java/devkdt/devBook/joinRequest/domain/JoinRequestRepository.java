@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface JoinRequestRepository extends JpaRepository<JoinRequest, Long> {
 
 
-    @Query("select j from JoinRequest j")
-    Page<JoinRequest> findJoinRequestOnePage(Pageable pageable);
+  @Query("select j from JoinRequest j")
+  Page<JoinRequest> findJoinRequestOnePage(Pageable pageable);
 }

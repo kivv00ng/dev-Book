@@ -69,9 +69,9 @@ public class BookService {
   }
 
   public BookResponse findBookById(Long bookId) {
-    Book book = bookRepository.findById(bookId)
+    Book foundBook = bookRepository.findById(bookId)
         .orElseThrow(() -> new NotFoundByIdBookException(bookId));
-    return new BookResponse(book);
+    return new BookResponse(foundBook);
   }
 
   public void deleteBookById(Long bookId) {
@@ -94,5 +94,20 @@ public class BookService {
     int allPageCount = books.getTotalPages();
 
     return new BookOnePage(bookCount, allPageCount, bookForPages);
+  }
+
+  @Transactional
+  public BookResponse updateBook(BookUpdateRequest bookUpdateRequest) {
+    Book foundBook = bookRepository.findById(bookUpdateRequest.getBookId())
+        .orElseThrow(() -> new NotFoundByIdBookException(bookUpdateRequest.getBookId()));
+
+    foundBook.changeBook(bookUpdateRequest.toBook());
+
+    return new BookResponse(foundBook);
+  }
+
+  @Transactional
+  public void delete(long bookId) {
+    bookRepository.deleteById(bookId);
   }
 }
