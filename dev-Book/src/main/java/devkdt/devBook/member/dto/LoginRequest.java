@@ -1,8 +1,8 @@
 package devkdt.devBook.member.dto;
 
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 public class LoginRequest {
 
   private String slackId;
@@ -11,8 +11,4 @@ public class LoginRequest {
   public LoginRequest() {
   }
 
-  public LoginRequest(String slackId, String password) {
-    this.slackId = slackId;
-    this.password = password;
-  }
 }

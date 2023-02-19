@@ -1,10 +1,11 @@
 package devkdt.devBook.member.presentation;
 
 import devkdt.devBook.member.application.MemberService;
-import devkdt.devBook.member.dto.LoginRequest;
-import devkdt.devBook.joinRequest.dto.MemberJoinRequest;
-import devkdt.devBook.joinRequest.dto.MemberJoinResponse;
 import devkdt.devBook.member.domain.Member;
+import devkdt.devBook.member.dto.LoginRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
@@ -12,9 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 @Slf4j
 @RestController
@@ -38,21 +36,45 @@ public class MemberController {
 //            log.info("#### Member Not Found Exception");
 //            return ResponseEntity.badRequest().build();
 //        }
+    log.info("#### login 메소드 시작{}", request);
     LoginRequest loginRequest = httpEntity.getBody();
+
+    log.info("######## loginSlackId: " + loginRequest.getSlackId());
+    log.info("######## loginPassword: " + loginRequest.getPassword());
     Member loginMember = memberService.login(loginRequest);
 
     HttpSession httpSession = request.getSession();
+//    SessionCookieConfig sessionCookieConfig = httpSession.getServletContext()
+//        .getSessionCookieConfig();
+//    sessionCookieConfig.setHttpOnly(false);
+    log.info("###login rquest={}", request);
     httpSession.setAttribute("loginMember", loginMember);
+
+    log.info("#### httpSession: {}", httpSession.getAttribute("loginMember"));
     return ResponseEntity.ok().build();
 
   }
 
-  @PostMapping("/members/add")
-  public ResponseEntity<MemberJoinResponse> addMember(HttpEntity<MemberJoinRequest> httpEntity) {
-    MemberJoinRequest memberJoinRequest = httpEntity.getBody();
-    MemberJoinResponse memberJoinResponse = memberService.save(memberJoinRequest.toMember());
-    //log.info("###memberJoinResponse={}", memberJoinResponse);
-    return ResponseEntity.ok(memberJoinResponse);
+//  @PostMapping("/members/add")
+//  public ResponseEntity<MemberJoinResponse> addMember(
+//      @RequestBody MemberJoinRequest memberJoinRequest) {
+//    MemberJoinResponse memberJoinResponse = memberService.save(memberJoinRequest.toMember());
+//    log.info("###memberJoinResponse={}", memberJoinResponse);
+//    return ResponseEntity.ok(memberJoinResponse);
+//  }
+
+  @PostMapping("/api/logout")
+  public ResponseEntity<Void> logout(HttpServletRequest request) {
+    HttpSession httpSession = request.getSession(false);
+
+    log.info("로그아웃 요청!");
+
+    if (httpSession != null) {
+      log.info("####로그아웃 완료!!");
+      httpSession.invalidate();
+    }
+
+    return ResponseEntity.ok().build();
 
   }
 

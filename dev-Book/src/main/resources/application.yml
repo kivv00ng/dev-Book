@@ -29,6 +29,8 @@ server:
     session:
       tracking-modes: cookie
       timeout: 1800
+      cookie:
+        http-only: false
 
 slack:
   token: ${SLACK_TOKEN}

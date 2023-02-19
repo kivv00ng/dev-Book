@@ -1,9 +1,9 @@
 package devkdt.devBook.service;
 
-import devkdt.devBook.joinRequest.dto.MemberJoinResponse;
+import devkdt.devBook.joinRequest.domain.TemporaryMember;
+import devkdt.devBook.joinRequest.dto.MemberApplyResponse;
 import devkdt.devBook.member.application.MemberService;
 import devkdt.devBook.member.domain.Authority;
-import devkdt.devBook.joinRequest.domain.TemporaryMember;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +30,10 @@ class MemberServiceTest {
   void approveJoinTest() {
     TemporaryMember temporaryMember = new TemporaryMember("name1", "slackId1", "1234",
         "slackNickName1", "010-1234-1234", Authority.ADMIN);
-    MemberJoinResponse memberJoinResponse = memberService.approveJoin(temporaryMember);
+    MemberApplyResponse memberApplyResponse = memberService.approveJoin(temporaryMember);
 
-    Assertions.assertThat(memberJoinResponse.getName()).isEqualTo("name1");
-    System.out.println("#### =>" + memberJoinResponse);
+    Assertions.assertThat(memberApplyResponse.getName()).isEqualTo("name1");
+    System.out.println("#### =>" + memberApplyResponse);
   }
 
 }

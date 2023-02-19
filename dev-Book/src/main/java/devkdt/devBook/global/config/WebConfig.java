@@ -2,8 +2,12 @@ package devkdt.devBook.global.config;
 
 import devkdt.devBook.global.filter.AuthorizationFilter;
 import devkdt.devBook.global.filter.LoginFilter;
-import jakarta.servlet.Filter;
+import javax.servlet.Filter;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.SessionCookieConfig;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -11,7 +15,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-  //@Bean
+  @Bean
+  public ServletContextInitializer sessionCookieConfig() {
+    return new ServletContextInitializer() {
+      @Override
+      public void onStartup(ServletContext servletContext) throws ServletException {
+        //servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
+        SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
+        sessionCookieConfig.setHttpOnly(false);
+      }
+    };
+  }
+
+  @Bean
   public FilterRegistrationBean loginFilter() {
     FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<Filter>();
 
@@ -21,7 +37,7 @@ public class WebConfig implements WebMvcConfigurer {
     return filterRegistrationBean;
   }
 
-  //@Bean
+  @Bean
   public FilterRegistrationBean authorizationFilter() {
     FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<Filter>();
 

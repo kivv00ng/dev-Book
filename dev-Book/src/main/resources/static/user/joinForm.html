@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>Login</title>
+  <title>Join</title>
 
   <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
@@ -79,7 +79,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="/">Dev-Reading</a>
+        <a class="navbar-brand" href="/">Dev-Book</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
@@ -93,8 +93,8 @@
             <a
                 class="nav-link active"
                 aria-current="page"
-                href="/newBook"
-            >Insert</a
+                href="/login"
+            >Login</a
             >
           </li>
           <li class="nav-item">
@@ -102,21 +102,10 @@
                 class="nav-link active"
                 aria-current="page"
                 href="/login"
-            >Login</a
+            >Logout</a
             >
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
       </div>
     </div>
   </nav>
@@ -129,10 +118,10 @@
     <div class="flex_explanation_container">
       <div class="flex_item1_grid">
         <div>
-          <label> ID :</label>
+          <label> slackId :</label>
         </div>
         <div>
-          <input id="input_email" class="input"/>
+          <input id="input_slackId" class="input"/>
           <br/>
         </div>
         <div>
@@ -142,49 +131,98 @@
           <input id="input_password" class="input"/>
           <br/>
         </div>
+        <div>
+          <label> name :</label>
+        </div>
+        <div>
+          <input id="input_name" class="input"/>
+          <br/>
+        </div>
+        <div>
+          <label> slackNickName :</label>
+        </div>
+        <div>
+          <input id="input_slackNickName" class="input"/>
+          <br/>
+        </div>
+        <div>
+          <label> phoneNumber : </label>
+        </div>
+        <div>
+          <input id="input_phoneNumber" class="input"/>
+          <br/>
+        </div>
+
+        <div>
+          <label> 해당하는 부분을 선택: </label>
+        </div>
+        <div>
+          <input type="radio" id="input_mentor" name="authority" class="input" value="mentor">
+          <label>멘토</label><br>
+          <input type="radio" id="input_graduate" name="authority" class="input" value="graduate">
+          <label>수료생</label><br>
+
+        </div>
       </div>
     </div>
   </div>
   <div id="buttons" class="button">
-    <button id="login_button" onclick=clickLogin()>login</button>
-    <button id="join_button" onclick=clickJoin()>join</button>
+    <button id="ok_button" onclick=clickJoin()>OK</button>
     <button id="cancel_button" onclick=clickCancel()>cancel</button>
   </div>
 </div>
 <script>
-  function clickLogin() {
-    var input_email = document.getElementById("input_email").value;
+  function clickJoin() {
+    var input_slackId = document.getElementById("input_slackId").value;
     var input_password = document.getElementById("input_password").value;
+    var input_name = document.getElementById("input_name").value;
+    var input_slackNickName = document.getElementById("input_slackNickName").value;
+    var input_phoneNumber = document.getElementById("input_phoneNumber").value;
+    //var input_authority = document.getElementById("input_authority").value;
+    var input_authority = document.querySelector('input[name="authority"]:checked').value;
 
     var jsonRequest = JSON.stringify({
-      email: input_email,
-      password: input_password
+      slackId: input_slackId,
+      password: input_password,
+      name: input_name,
+      slackNickName: input_slackNickName,
+      phoneNumber: input_phoneNumber,
+      authority: input_authority
     })
 
-    fetch("http://localhost:8080/api/login", {
+    fetch("http://localhost:8080/api/join", {
       method: "POST",
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
       },
       body: jsonRequest,
     }).then((response) => {
-      console.log("response: " + response);
-      console.log("cookie: " + document.cookie.toString());
-      console.log("set-cookie: " + response.headers.get("Set-Cookie"));
-      console.log("login success!");
-      window.location.href = "http://localhost:8080/";
-    }).catch((error) => {
+          console.log("response: " + response)
+          return response.json();
+        }
+    ).then((jsonData) => {
+      console.log("jsongData.stringfy(): " + JSON.stringify(jsonData));
+      window.location.href = "http://localhost:8080/login";
+    })
+    .catch((error) => {
       console.error('Error:', error);
-      window.alert("email과 password가 잘못되었습니다.");
     });
-  }
-
-  function clickJoin() {
-    window.location.href = "http://localhost:8080/newMember";
   }
 
   function clickCancel() {
     window.location.href = "./";
+  }
+
+  function logout() {
+    fetch("http://localhost:8080/api/logout", {
+      method: "POST",
+    }).then((response) => {
+          console.log("response: " + response)
+          setCookie("JSESSIONID", '', 0);
+        }
+    ).catch((error) => {
+      console.error('Error:', error);
+    });
   }
 
 

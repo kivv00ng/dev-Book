@@ -1,21 +1,21 @@
 package devkdt.devBook.evaluation.domain;
 
-
 import devkdt.devBook.book.domain.Book;
 import devkdt.devBook.member.domain.Member;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Evaluation {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(
       name = "evaluation_id"
   )
@@ -36,6 +36,11 @@ public class Evaluation {
   private Member member;
 
   public Evaluation() {
+  }
+
+  public Evaluation(Book book, Member member) {
+    this.book = book;
+    this.member = member;
   }
 
   public void addEvaluation(Book book, Member member) {

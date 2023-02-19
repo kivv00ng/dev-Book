@@ -83,13 +83,13 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-        <a class="navbar-brand" href="/">Dev-Reading</a>
+        <a class="navbar-brand" href="/admin">Dev-Book</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
             <a
                 class="nav-link active"
                 aria-current="page"
-                href="/"
+                href="/admin"
             >Home</a
             >
           </li>
@@ -97,7 +97,7 @@
             <a
                 class="nav-link active"
                 aria-current="page"
-                href="/newBook"
+                href="/admin/newBook"
             >Insert</a
             >
           </li>
@@ -105,22 +105,28 @@
             <a
                 class="nav-link active"
                 aria-current="page"
-                href="/login"
+                href="/admin/joinManage"
+            >JoinManage</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+                class="nav-link active"
+                aria-current="page"
+                href="/admin/login"
+                id="login_navbar"
             >Login</a
             >
           </li>
+          <li class="nav-item">
+            <a
+                class="nav-link active"
+                aria-current="page"
+                onclick="logout()"
+            >Logout</a
+            >
+          </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search"
-              aria-label="Search"
-          />
-          <button class="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
       </div>
     </div>
   </nav>
@@ -159,16 +165,29 @@
   <div class="evaluation">
     <table>
       <tr>
-        <th>devCourse</th>
-        <th>junior</th>
-        <th>middle</th>
+        <th>비추천</th>
+        <th>devCourse(취준)</th>
+        <th>junior(신입)</th>
+        <th>middle(경력)</th>
       </tr>
       <tr>
-        <td>👍</td>
-        <td>👍</td>
-        <td>👍</td>
+        <td>👎<input type="radio" id="input_radio_dislike" name="evaluation" class="input"
+                    value="dislike"></td>
+
+        <td>👍<input type="radio" id="input_radio_devCourse" name="evaluation" class="input"
+                    value="devCourse"></td>
+
+        <td>👍<input type="radio" id="input_radio_junior" name="evaluation" class="input"
+                    value="junior"></td>
+
+        <td>👍<input type="radio" id="input_radio_middle" name="evaluation" class="input"
+                    value="middle"></td>
+
       </tr>
       <tr>
+        <td>
+          <input id="evaluation_dislike" disabled/>
+        </td>
         <td>
           <input id="evaluation_devCourse" disabled/>
         </td>
@@ -184,10 +203,16 @@
 </div>
 <script>
   window.onload = () => {
-    var arrPath = window.location.pathname.split("/");
-    var pathName = arrPath[2];
+    if (document.cookie.includes("JSESSIONID")) {
+      var loginVar = document.getElementById("login_navbar")
+      loginVar.textContent = "admin";
+      loginVar.removeAttribute("href");
+    }
 
-    fetch("http://localhost:8080/api/books/" + pathName, {
+    var arrPath = window.location.pathname.split("/");
+    var pathName = arrPath[3];
+
+    fetch("http://localhost:8080/api/books/detail/" + pathName, {
       method: "GET",
     }).then((response) => {
           return response.json();
@@ -207,6 +232,7 @@
       document.getElementById("input_summary").value = book["summary"];
       document.getElementById("input_price").setAttribute("value", book["price"]);
 
+      document.getElementById("evaluation_dislike").setAttribute("value", book["dislike"]);
       document.getElementById("evaluation_devCourse").setAttribute("value", book["devCourse"]);
       document.getElementById("evaluation_junior").setAttribute("value", book["junior"]);
       document.getElementById("evaluation_middle").setAttribute("value", book["middle"]);
@@ -240,11 +266,11 @@
   function clickDelete() {
     if (confirm("정말 삭제하시겠습니까??") == true) {    //확인
       var bookId = document.getElementById("bookObject").dataset.index;
-      fetch("http://localhost:8080/api/books/" + bookId, {
+      fetch("http://localhost:8080/api/books/delete/" + bookId, {
         method: "DELETE",
       }).then((response) => {
             console.log(JSON.stringify(response.json()));
-            window.location.href = "http://localhost:8080";
+            window.location.href = "http://localhost:8080/admin";
           }
       ).catch((error) => {
         console.error('Error:', error);
@@ -283,6 +309,7 @@
     var input_summary = document.getElementById("input_summary").value;
     var input_price = document.getElementById("input_price").value;
 
+    var input_dislike = document.getElementById("evaluation_dislike").value;
     var input_devCourse = document.getElementById("evaluation_devCourse").value;
     var input_junior = document.getElementById("evaluation_junior").value;
     var input_middle = document.getElementById("evaluation_middle").value;
@@ -292,6 +319,7 @@
       title: input_title,
       summary: input_summary,
       price: input_price,
+      dislike: input_dislike,
       devCourse: input_devCourse,
       junior: input_junior,
       middle: input_middle
@@ -299,7 +327,7 @@
 
     console.log("Update, requestJson: " + jsonRequest);
     console.log(("dataset이용한 bookId:" + bookId));
-    fetch("http://localhost:8080/api/books", {
+    fetch("http://localhost:8080/api/books/update", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json; charset=UTF-8",
@@ -308,7 +336,7 @@
     }).then((response) => {
           console.log("response: " + response)
           console.log("response_json:" + JSON.stringify(response.json()));
-          window.location.href = "http://localhost:8080/books/" + bookId;
+          window.location.href = "http://localhost:8080/admin/books/" + bookId;
         }
     )
     .catch((error) => {
@@ -323,6 +351,7 @@
       document.getElementById("input_summary").disabled = true
       document.getElementById("input_price").disabled = true
 
+      document.getElementById("evaluation_dislike").disabled = true
       document.getElementById("evaluation_devCourse").disabled = true
       document.getElementById("evaluation_junior").disabled = true
       document.getElementById("evaluation_middle").disabled = true
@@ -331,10 +360,40 @@
       document.getElementById("input_summary").disabled = false;
       document.getElementById("input_price").disabled = false;
 
+      document.getElementById("evaluation_dislike").disabled = false
       document.getElementById("evaluation_devCourse").disabled = false;
       document.getElementById("evaluation_junior").disabled = false;
       document.getElementById("evaluation_middle").disabled = false;
     }
+  }
+
+  function logout() {
+    var loginVar = document.getElementById("login_navbar")
+    loginVar.textContent = "Login";
+    loginVar.setAttribute("href", "/Login");
+
+    fetch("http://localhost:8080/api/logout", {
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      },
+      method: "POST",
+    }).then((response) => {
+          console.log("response: " + response)
+          setCookie("JSESSIONID", '', 0);
+        }
+    ).catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
+  function setCookie(cName, cValue, cDay) {
+    var expire = new Date();
+    expire.setDate(expire.getDate() + cDay);
+    cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
+    if (typeof cDay != 'undefined') {
+      cookies += ';expires=' + expire.toGMTString() + ';';
+    }
+    document.cookie = cookies;
   }
 
 </script>

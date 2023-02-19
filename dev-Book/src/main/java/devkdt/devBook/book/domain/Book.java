@@ -1,23 +1,24 @@
 package devkdt.devBook.book.domain;
 
 import devkdt.devBook.evaluation.domain.Evaluation;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import lombok.Getter;
 
+@Getter
 @Entity
 public class Book {
 
   @Id
-  @GeneratedValue
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "book_id")
-  private Long bookId;
+  private Long id;
 
   @OneToMany(mappedBy = "book")
   private List<Evaluation> evaluations = new ArrayList<>();
@@ -26,6 +27,7 @@ public class Book {
   private String summary;
   private int price;
 
+  private int dislike;
   private int devCourse;
   private int junior;
   private int middle;
@@ -37,15 +39,18 @@ public class Book {
     this.title = title;
     this.summary = summary;
     this.price = price;
+    this.dislike = 0;
     this.devCourse = 0;
     this.junior = 0;
     this.middle = 0;
   }
 
-  public Book(String title, String summary, int price, int devCourse, int junior, int middle) {
+  public Book(String title, String summary, int price, int dislike, int devCourse, int junior,
+      int middle) {
     this.title = title;
     this.summary = summary;
     this.price = price;
+    this.dislike = dislike;
     this.devCourse = devCourse;
     this.junior = junior;
     this.middle = middle;
@@ -55,43 +60,15 @@ public class Book {
     this.title = book.getTitle();
     this.summary = book.getSummary();
     this.price = book.getPrice();
+    this.dislike = book.getDislike();
     this.devCourse = book.getDevCourse();
     this.junior = book.getJunior();
     this.middle = book.getMiddle();
   }
 
-  public Long getBookId() {
-    return bookId;
+  public void addDisLike() {
+    this.dislike++;
   }
-
-  public List<Evaluation> getEvaluations() {
-    return evaluations;
-  }
-
-  public String getTitle() {
-    return title;
-  }
-
-  public String getSummary() {
-    return summary;
-  }
-
-  public int getPrice() {
-    return price;
-  }
-
-  public int getDevCourse() {
-    return devCourse;
-  }
-
-  public int getJunior() {
-    return junior;
-  }
-
-  public int getMiddle() {
-    return middle;
-  }
-
 
   public void addDevCourse() {
     this.devCourse++;

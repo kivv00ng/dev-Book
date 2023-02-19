@@ -12,6 +12,7 @@ public class BookAddRequest {
   private String summary;
   private int price;
 
+  private int dislike;
   private int devCourse;
   private int junior;
   private int middle;
@@ -19,17 +20,20 @@ public class BookAddRequest {
   public BookAddRequest() {
   }
 
-  public BookAddRequest(String title, String summary, int price, int devCourse, int junior,
+  public BookAddRequest(String title, String summary, int price, int dislike, int devCourse,
+      int junior,
       int middle) {
     this.title = title;
     this.summary = summary;
     this.price = price;
+    this.dislike = dislike;
     this.devCourse = devCourse;
     this.junior = junior;
     this.middle = middle;
   }
 
   public Book toBook() {
-    return new Book(this.title, this.summary, this.price, this.devCourse, this.junior, this.middle);
+    return new Book(this.title, this.summary, this.price, this.dislike, this.devCourse, this.junior,
+        this.middle);
   }
 }

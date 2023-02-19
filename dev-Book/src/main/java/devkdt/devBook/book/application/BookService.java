@@ -2,23 +2,29 @@ package devkdt.devBook.book.application;
 
 import devkdt.devBook.book.domain.Book;
 import devkdt.devBook.book.domain.BookRepository;
-import devkdt.devBook.book.dto.*;
+import devkdt.devBook.book.dto.BookAddRequest;
+import devkdt.devBook.book.dto.BookForPage;
+import devkdt.devBook.book.dto.BookOnePage;
+import devkdt.devBook.book.dto.BookResponse;
+import devkdt.devBook.book.dto.BookUpdateRequest;
+import devkdt.devBook.book.exception.NotFoundByIdBookException;
 import devkdt.devBook.evaluation.domain.Evaluation;
 import devkdt.devBook.evaluation.domain.EvaluationRepository;
 import devkdt.devBook.evaluation.dto.EvaluationRequest;
-import devkdt.devBook.member.exception.NotFoundByIdMemberException;
-import devkdt.devBook.book.exception.NotFoundByIdBookException;
+import devkdt.devBook.evaluation.exception.DuplicationException;
 import devkdt.devBook.member.domain.Member;
 import devkdt.devBook.member.domain.MemberRepository;
+import devkdt.devBook.member.exception.NotFoundByIdMemberException;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
+@Slf4j
 @Transactional(readOnly = true)
 @Service
 @RequiredArgsConstructor
@@ -39,16 +45,21 @@ public class BookService {
 
   @Transactional
   public void evaluate(Long bookId, Long memberId, EvaluationRequest evaluationRequest) {
-    Book book = bookRepository.findById(bookId)
+    Book foundBook = bookRepository.selectForUpdate(bookId)
         .orElseThrow(() -> new NotFoundByIdBookException(bookId));
 
-    Member member = memberRepository.findById(memberId)
+    Member foundMember = memberRepository.findById(memberId)
         .orElseThrow(() -> new NotFoundByIdMemberException(memberId));
 
-    applyEvaluation(book, evaluationRequest);
+    if (evaluationRepository.existsEvaluationByBookAndMember(foundBook, foundMember)) {
+      log.info("###########이미 투표하셨습니다!");
+      throw new DuplicationException(memberId, bookId);
+    }
+
+    applyEvaluation(foundBook, evaluationRequest);
     Evaluation evaluation = new Evaluation();
 
-    evaluation.addEvaluation(book, member);
+    evaluation.addEvaluation(foundBook, foundMember);
     evaluationRepository.save(evaluation);
   }
 
@@ -88,7 +99,7 @@ public class BookService {
     Page<Book> books = bookRepository.findBookPage(pageRequest);
 
     List<BookForPage> bookForPages = books.stream()
-        .map(book -> new BookForPage(book.getBookId(), book.getTitle()))
+        .map(book -> new BookForPage(book.getId(), book.getTitle()))
         .collect(Collectors.toList());
     int bookCount = bookForPages.size();
     int allPageCount = books.getTotalPages();

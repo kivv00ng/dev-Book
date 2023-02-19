@@ -2,11 +2,16 @@ package devkdt.devBook.global.error;
 
 import devkdt.devBook.book.exception.ImageIOException;
 import devkdt.devBook.book.exception.ImageNotFoundException;
-import devkdt.devBook.book.exception.BookException;
-import devkdt.devBook.member.exception.MemberException;
+import devkdt.devBook.book.exception.NotFoundByIdBookException;
+import devkdt.devBook.evaluation.exception.DuplicationException;
 import devkdt.devBook.global.error.dto.ErrorReportRequest;
 import devkdt.devBook.global.error.dto.ErrorResponse;
-
+import devkdt.devBook.member.exception.AuthorityException;
+import devkdt.devBook.member.exception.MemberException;
+import devkdt.devBook.member.exception.NotFoundByIdMemberException;
+import devkdt.devBook.member.exception.NotFoundLoginMemberException;
+import devkdt.devBook.member.exception.WrongPhoneNumberException;
+import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -18,20 +23,29 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestControllerAdvice
 public class ControllerAdvice {
 
   private static final Logger log = LoggerFactory.getLogger(ControllerAdvice.class);
 
   @ExceptionHandler({
-      BookException.class,
-      MemberException.class
+      NotFoundByIdBookException.class,
+      NotFoundByIdMemberException.class,
+      NotFoundLoginMemberException.class,
+      WrongPhoneNumberException.class,
+      MemberException.class,
+      DuplicationException.class
   })
   public ResponseEntity<ErrorResponse> handleInvalidData(RuntimeException e) {
     ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
     return ResponseEntity.badRequest().body(errorResponse);
+  }
+
+  @ExceptionHandler(
+      AuthorityException.class)
+  public ResponseEntity<ErrorResponse> authorityMember(RuntimeException e) {
+    ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+    return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
   }
 
   @ExceptionHandler({

@@ -3,46 +3,67 @@ package devkdt.devBook.joinRequest.application;
 import devkdt.devBook.joinRequest.domain.JoinRequest;
 import devkdt.devBook.joinRequest.domain.JoinRequestRepository;
 import devkdt.devBook.joinRequest.domain.TemporaryMember;
-import devkdt.devBook.joinRequest.dto.JoinRequestOnePage;
-import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import devkdt.devBook.joinRequest.dto.JoinManagementResponse;
+import devkdt.devBook.joinRequest.dto.JoinOneResponse;
+import devkdt.devBook.joinRequest.dto.MemberApplyResponse;
+import devkdt.devBook.joinRequest.exception.JoinRequestNotFoundException;
+import devkdt.devBook.member.application.MemberService;
+import java.util.List;
+import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-@RequiredArgsConstructor
-@Transactional
+@Transactional(readOnly = true)
 @Service
 public class JoinRequestService {
 
-    private final JoinRequestRepository joinRequestRepository;
-    private final SlackService slackService;
+  private final JoinRequestRepository joinRequestRepository;
+  private final MemberService memberService;
+  private final SlackService slackService;
 
-    public JoinRequest save(TemporaryMember temporaryMember) {
-        JoinRequest joinRequest = joinRequestRepository.save(new JoinRequest(temporaryMember));
-        slackService.postSlackMessage("회원가입이 요청되었습니다. : " + temporaryMember);
+  public JoinRequestService(JoinRequestRepository joinRequestRepository,
+      MemberService memberService,
+      SlackService slackService) {
+    this.joinRequestRepository = joinRequestRepository;
+    this.memberService = memberService;
+    this.slackService = slackService;
+  }
 
-        return joinRequest;
-    }
+  @Transactional
+  public JoinRequest save(TemporaryMember temporaryMember) {
+    JoinRequest joinRequest = joinRequestRepository.save(new JoinRequest(temporaryMember));
+    slackService.postSlackMessage(
+        temporaryMember.getName() + "(" + temporaryMember.getSlackId() + ")님이회원가입을 요청하셨습니다. : "
+            + temporaryMember);
 
-    public void delete(Long joinId) {
-        joinRequestRepository.deleteById(joinId);
-    }
+    return joinRequest;
+  }
 
-    public JoinRequestOnePage findOnePageJoinRequest(int pageNumber) {
-        PageRequest pageRequest = PageRequest.of(pageNumber, 10);
+  @Transactional
+  public void delete(Long joinId) {
+    joinRequestRepository.deleteById(joinId);
+  }
 
-        Page<JoinRequest> pages = joinRequestRepository.findJoinRequestOnePage(pageRequest);
+  public JoinManagementResponse findAll() {
+    List<JoinRequest> joinRequests = joinRequestRepository.findAll();
 
-        List<JoinRequest> joinRequests = pages.stream().collect(Collectors.toList());
+    List<JoinOneResponse> joinOneResponses = joinRequests.stream()
+        .map(joinRequest -> new JoinOneResponse(joinRequest)).collect(Collectors.toList());
 
-        int allContent = joinRequests.size();
-        int allPageCount = pages.getTotalPages();
+    return new JoinManagementResponse(joinOneResponses);
+  }
 
-        return new JoinRequestOnePage(allContent, allPageCount, joinRequests);
-    }
+  @Transactional
+  public MemberApplyResponse apply(Long joinRequestId) {
+    JoinRequest joinRequest = joinRequestRepository.findById(joinRequestId).orElseThrow(() -> {
+      throw new JoinRequestNotFoundException(joinRequestId);
+    });
 
+    MemberApplyResponse memberApplyResponse = memberService.approveJoin(
+        joinRequest.getTemporaryMember());
+
+    joinRequestRepository.deleteById(joinRequestId);
+
+    return memberApplyResponse;
+  }
 }

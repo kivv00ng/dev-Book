@@ -5,7 +5,7 @@ import devkdt.devBook.member.domain.Member;
 import lombok.Data;
 
 @Data
-public class MemberJoinResponse {
+public class MemberApplyResponse {
 
   private Long id;
   private String name;
@@ -15,10 +15,10 @@ public class MemberJoinResponse {
   private String phoneNumber;
   private Authority authority;
 
-  public MemberJoinResponse() {
+  public MemberApplyResponse() {
   }
 
-  public MemberJoinResponse(Member member) {
+  public MemberApplyResponse(Member member) {
     this.id = member.getId();
     this.name = member.getName();
     this.slackId = member.getSlackId();

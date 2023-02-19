@@ -2,23 +2,24 @@ package devkdt.devBook.global.filter;
 
 import devkdt.devBook.member.domain.Authority;
 import devkdt.devBook.member.domain.Member;
-import jakarta.servlet.Filter;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.PatternMatchUtils;
-
-import java.io.IOException;
 
 @Slf4j
 public class AuthorizationFilter implements Filter {
 
-  private static final String[] adminList = {"/books/update", "/books/delete", "/joinRequests"};
+  private static final String[] adminList = {"/admin/*", "/api/books/update",
+      "/api/books/delete/*",
+      "/joinRequests"};
 
   @Override
   public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
@@ -30,11 +31,11 @@ public class AuthorizationFilter implements Filter {
     HttpServletResponse httpResponse = (HttpServletResponse) response;
 
     if (isAdminAuthorizationCheckPath(requestURI)) {
-      //log.info("###AuthorizationFilterURI 확인 => {}", requestURI);
+      log.info("###AuthorizationFilterURI 확인 => {}", requestURI);
       HttpSession httpSession = httpRequest.getSession(false);
       Member loginMember = (Member) httpSession.getAttribute("loginMember");
       if (loginMember.getAuthority() != Authority.ADMIN) { //로그인 멤버의 권한이 admin이 아닐시 403 응답.
-        //log.info("###AuthorizationFilter실패");
+        log.info("###AuthorizationFilter실패, Admin이 아닙니다!");
         httpResponse.setStatus(403);
         return;
       }

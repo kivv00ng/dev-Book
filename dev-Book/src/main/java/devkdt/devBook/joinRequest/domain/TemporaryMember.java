@@ -2,9 +2,10 @@ package devkdt.devBook.joinRequest.domain;
 
 import devkdt.devBook.member.domain.Authority;
 import devkdt.devBook.member.domain.Member;
+import javax.persistence.Embeddable;
+import lombok.Getter;
 
-import jakarta.persistence.Embeddable;
-
+@Getter
 @Embeddable
 public class TemporaryMember {
 
@@ -18,18 +19,18 @@ public class TemporaryMember {
   public TemporaryMember() {
   }
 
-  public TemporaryMember(String name, String slackId, String password, String slackNickName,
+  public TemporaryMember(String slackId, String password, String name, String slackNickName,
       String phoneNumber, Authority authority) {
-    this.name = name;
     this.slackId = slackId;
     this.password = password;
+    this.name = name;
     this.slackNickName = slackNickName;
     this.phoneNumber = phoneNumber;
     this.authority = authority;
   }
 
   public Member toMember() {
-    return new Member(this.name, this.slackId, this.password, this.slackNickName, this.phoneNumber,
+    return new Member(this.slackId, this.password, this.name, this.slackNickName, this.phoneNumber,
         authority);
   }
 
