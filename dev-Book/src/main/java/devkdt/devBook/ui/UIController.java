@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @Controller
@@ -42,6 +43,19 @@ public class UIController {
     return "user/detailBook";
   }
 
+  @GetMapping("/joinComplete")
+  String joinComplete() {
+    //bookService.findBookById(id); //있나없나 확인하기!
+
+    return "user/joinComplete";
+  }
+
+  @GetMapping("/test/{testId}/hello")
+  @ResponseBody
+  String testHello(@PathVariable("testId") String testId) {
+    return "hello" + testId;
+  }
+
   //////admin
 
   @GetMapping("/admin")
@@ -69,5 +83,5 @@ public class UIController {
   String detailVAdmin() {
     return "admin/joinManagement";
   }
-  
+
 }

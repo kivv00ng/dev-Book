@@ -198,15 +198,15 @@
       body: jsonRequest,
     }).then((response) => {
           console.log("response: " + response)
-          return response.json();
+          if (response.ok) {
+            window.location.href = "http://localhost:8080/joinComplete";
+          } else {
+            alert("기존에 가입했거나 이미 회원가입을 요청하신 유저 입니다.")
+            // window.location.href = "http://localhost:8080/join";
+          }
+
         }
-    ).then((jsonData) => {
-      console.log("jsongData.stringfy(): " + JSON.stringify(jsonData));
-      window.location.href = "http://localhost:8080/login";
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    });
+    )
   }
 
   function clickCancel() {

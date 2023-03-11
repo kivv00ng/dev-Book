@@ -17,6 +17,7 @@ public class LoginFilter implements Filter {
 
   private static final String[] whitelist = {"/", "/page", "/books/*", "/api/books/detail/*",
       "/images/*", "/newMember", "/members/add", "/api/join", "/api/login", "/login", "/logout",
+      "/joinComplete", "/test/*/hello",
       "/css/*",
       "/favicon.ico"};
 
@@ -27,8 +28,6 @@ public class LoginFilter implements Filter {
     String requestURI = httpRequest.getRequestURI();
 
     HttpServletResponse httpResponse = (HttpServletResponse) response;
-
-//    log.info("####인증필터 시작 {}", requestURI);
 
     if (isLoginCheckPath(requestURI)) {
       log.info("인증 체크 로직 실행 {}", requestURI);
@@ -46,15 +45,6 @@ public class LoginFilter implements Filter {
         httpResponse.sendRedirect("/login?redirectURL=" + requestURI);
         return; //미인증 사용자는 다음으로 진행하지 않고 끝!
       }
-//      if (httpSession == null || httpSession.getAttribute("loginMember") == null) {
-//        log.info("### 미인증 사용자 요청 {}", requestURI);
-//
-//        //로그인 redirect
-////        httpResponse.setStatus(401);
-////        or
-//        httpResponse.sendRedirect("/login?redirectURL=" + requestURI);
-//        return; //미인증 사용자는 다음으로 진행하지 않고 끝!
-//      }
     }
     chain.doFilter(request, response);
   }
@@ -65,7 +55,6 @@ public class LoginFilter implements Filter {
    * @param requestURI
    * @return boolean
    */
-
   private boolean isLoginCheckPath(String requestURI) {
     return !PatternMatchUtils.simpleMatch(whitelist, requestURI);
   }

@@ -31,13 +31,4 @@ public class EvaluationRequest {
       book.addMiddle();
     }
   }
-//  public void addEvaluation(Book book) {
-//    if (this.evaluationType.equals("devCourse")) {
-//      book.addDevCourse();
-//    } else if (this.evaluationType.equals("junior")) {
-//      book.addJunior();
-//    } else {
-//      book.addMiddle();
-//    }
-//  }
 }

@@ -219,7 +219,7 @@ class BookServiceTest {
   @Transactional
   @Test
   void addBook() {
-    BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111, 1, 1, 1);
+    BookAddRequest postAddRequest = new BookAddRequest("addTitle", "addContent", 1111, 1, 1, 1, 1);
     BookResponse postDetailResponse = bookService.addBook(postAddRequest);
     BookResponse foundBookResponse = bookService.findBookById(postDetailResponse.getBookId());
     assertThat(postDetailResponse).usingRecursiveComparison().isEqualTo(foundBookResponse);

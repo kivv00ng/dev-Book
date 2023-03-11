@@ -16,7 +16,6 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
@@ -33,7 +32,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class BookController {
@@ -52,7 +50,7 @@ public class BookController {
     } catch (IOException e) {
       throw new ImageIOException(bookResponse.getBookId());
     }
-    //log.info("bookResponse:" + bookResponse);
+
     return ResponseEntity.created(URI.create("/api/books/" + bookResponse.getBookId()))
         .body(bookResponse);
   }
@@ -78,10 +76,6 @@ public class BookController {
     }
   }
 
-  //  @GetMapping("/page/{pageNumber}")
-//  public BookOnePage getPage(@PathVariable("pageNumber") int pageNumber) {
-//    return bookService.findOnePageBook(pageNumber);
-//  }
   @GetMapping("/page")
   public BookOnePage getPage(
       @RequestParam(value = "pageNumber", required = false, defaultValue = "0") int pageNumber) {
@@ -106,7 +100,6 @@ public class BookController {
       @RequestBody EvaluationRequest evaluationRequest) {
 
     bookService.evaluate(id, loginMember.getId(), evaluationRequest);
-    log.info("##### evaluation" + evaluationRequest.toString());
 
     return ResponseEntity.ok().build();
   }

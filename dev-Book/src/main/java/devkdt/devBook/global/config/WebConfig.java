@@ -20,7 +20,6 @@ public class WebConfig implements WebMvcConfigurer {
     return new ServletContextInitializer() {
       @Override
       public void onStartup(ServletContext servletContext) throws ServletException {
-        //servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
         SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
         sessionCookieConfig.setHttpOnly(false);
       }

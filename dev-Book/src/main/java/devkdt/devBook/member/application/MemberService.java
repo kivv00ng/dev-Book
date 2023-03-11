@@ -20,6 +20,10 @@ public class MemberService {
 
   private final MemberRepository memberRepository;
 
+  public Boolean existsByPhoneNumber(String phoneNumber) {
+    return memberRepository.existsByPhoneNumber(phoneNumber);
+  }
+
   public Member login(LoginRequest loginRequest) {
     Member loginMember = memberRepository.findMemberForLogin(loginRequest.getSlackId(),
         loginRequest.getPassword()).orElseThrow(() -> {

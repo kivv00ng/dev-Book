@@ -34,15 +34,6 @@ public class BookService {
   private final EvaluationRepository evaluationRepository;
   private final MemberRepository memberRepository;
 
-//    @Transactional
-//    public void evaluateV0(Long bookId, EvaluationRequest evaluationRequest) {
-//        book book = bookRepository.findById(bookId).orElseThrow(() -> new RuntimeException("customException만들기.."));
-//        addEvaluation(book, evaluationRequest);
-//        Evaluation evaluation = new Evaluation();
-//        evaluation.addEvaluation(book);
-//        evaluationRepository.save(evaluation);
-//    }
-
   @Transactional
   public void evaluate(Long bookId, Long memberId, EvaluationRequest evaluationRequest) {
     Book foundBook = bookRepository.selectForUpdate(bookId)
@@ -52,7 +43,6 @@ public class BookService {
         .orElseThrow(() -> new NotFoundByIdMemberException(memberId));
 
     if (evaluationRepository.existsEvaluationByBookAndMember(foundBook, foundMember)) {
-      log.info("###########이미 투표하셨습니다!");
       throw new DuplicationException(memberId, bookId);
     }
 
@@ -83,10 +73,6 @@ public class BookService {
     Book foundBook = bookRepository.findById(bookId)
         .orElseThrow(() -> new NotFoundByIdBookException(bookId));
     return new BookResponse(foundBook);
-  }
-
-  public void deleteBookById(Long bookId) {
-    bookRepository.deleteById(bookId);
   }
 
   public List<Book> findAllBook() {

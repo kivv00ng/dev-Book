@@ -8,7 +8,4 @@ public interface EvaluationRepository extends JpaRepository<Evaluation, Long> {
 
   boolean existsEvaluationByBookAndMember(Book book, Member member);
 
-//  @Query("select e from Evaluation e where e.member=:memberId and")
-//  Optional
-
 }
