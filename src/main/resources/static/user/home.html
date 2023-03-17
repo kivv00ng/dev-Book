@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Home</title>
+
+  <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+  />
+  <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+  ></script>
+  <style>
+    .flex_main_container {
+      display: flex;
+      flex-direction: row;
+      justify-content: start;
+      flex-wrap: wrap;
+
+      margin-top: 1.6em;
+      margin-bottom: 1.6em;
+      margin-left: 30vh;
+      margin-right: 30vh;
+
+      padding-left: 10vh;
+      padding-right: 10vh;
+      padding-top: 3vh;
+      padding-bottom: 20vh;
+      border: 1px solid black;
+
+      padding-bottom: 20vh;
+      align-items: center;
+    }
+
+    article {
+      margin: 1vh 1vh 1vh 1vh;
+    }
+
+    /*.thumbnail {*/
+    /*  height: 20vh;*/
+    /*}*/
+
+    .thumbnail img {
+      width: 100%;
+      height: 20vh;
+
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .title {
+      margin: 10% 10% 10%;
+
+      font-weight: 700;
+      font-size: 100%;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+        <a class="navbar-brand" href="/">Dev-Book</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a
+                class="nav-link active"
+                aria-current="page"
+                href="/"
+            >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+                class="nav-link active"
+                aria-current="page"
+                id="login_navbar"
+                href="/login"
+            >Login</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+                class="nav-link active"
+                aria-current="page"
+                onclick="logout()"
+            >Logout</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div id="article_container" class="flex_main_container">
+
+
+</div>
+<nav aria-label="Page navigation example">
+  <ul id="page-main" data-pageindex="0" class="pagination justify-content-center">
+
+  </ul>
+</nav>
+
+
+<script>
+  window.onload = () => {
+
+    if (document.cookie.includes("JSESSIONID")) {
+      var loginVar = document.getElementById("login_navbar")
+      loginVar.textContent = "member";
+      loginVar.removeAttribute("href");
+    }
+    var pageMain = document.getElementById("page-main")
+    const urlParams = new URL(location.href).searchParams;
+    var pageNumber = urlParams.get('pageNumber');
+    if (pageNumber == null) {
+      pageNumber = 0;
+    }
+    var pageIndex = pageMain.dataset["pageindex"];
+    callPage(pageNumber, pageIndex);
+  }
+
+  function callPage(pageNumber, pageIndex) {
+    var article_container = document.getElementById("article_container");
+
+    while (article_container.firstChild) {
+      article_container.firstChild.remove()
+    }
+
+    var pageMain = document.getElementById("page-main")
+
+    fetch("http://localhost:8080/page?pageNumber=" + pageNumber, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json; charset=UTF-8",
+      }
+    }).then((response) => {
+      return response.json();
+    }).then((books) => {
+      console.log(books);
+      pageMain.setAttribute("data-allpagecount", books["allPageCount"])
+
+      var previous_li = document.createElement("li");
+      previous_li.setAttribute("class", "page-item");
+      var previous_a = document.createElement("a");
+      previous_a.setAttribute("id", "page-next");
+      previous_a.setAttribute("class", "page-link");
+      previous_a.setAttribute("onclick", "clickPrevious()");
+      previous_a.textContent = "Previous";
+      previous_li.appendChild(previous_a);
+      pageMain.appendChild(previous_li);
+
+      var next_li = document.createElement("li");
+      next_li.setAttribute("class", "page-item");
+      var next_a = document.createElement("a");
+      next_a.setAttribute("id", "page-next");
+      next_a.setAttribute("class", "page-link");
+      next_a.setAttribute("onclick", "clickNext()");
+      next_a.textContent = "Next";
+      next_li.appendChild(next_a);
+
+      var indexEnd = 3;
+
+      if ((books["allPageCount"] - (pageIndex * 3)) < 3) {
+        indexEnd = (books["allPageCount"] - (pageIndex * 3));
+      }
+
+      for (var i = 1; i <= indexEnd; i++) {
+        var li = document.createElement("li");
+        li.setAttribute("class", "page-item");
+        var a = document.createElement("a");
+        a.setAttribute("id", "page-item" + i);
+        a.setAttribute("data-number", (pageIndex * 3 + i));
+        a.setAttribute("class", "page-link");
+        a.setAttribute("href", "/?pageNumber=" + (pageIndex * 3 + i - 1));
+        //a.setAttribute("onclick", "clickPageNumber(" + (pageIndex * 3 + i - 1) + ")");
+        a.textContent = (pageIndex * 3) + i;
+        li.appendChild(a);
+        pageMain.appendChild(li);
+      }
+
+      console.log("#### disabled: " + next_li.disabled);
+
+      pageMain.appendChild(next_li);
+
+      for (let book of books["pagePosts"]) {
+        var article = document.createElement("article");
+
+        article.setAttribute("class", "card");
+        article.setAttribute("data-index", book["bookId"]);
+        article.setAttribute("onclick", "clickArticle(" + book["bookId"] + ")");
+
+        var div = document.createElement("div");
+        div.setAttribute("class", "thumbnail");
+        var image = document.createElement("img");
+
+        image.setAttribute("src", "/images/" + book["bookId"] + ".png");
+
+        div.appendChild(image);
+        article.appendChild(div);
+
+        var title = document.createElement("h2");
+        title.setAttribute("class", "title");
+        title.textContent = book["title"];
+
+        article.appendChild(title);
+
+        document.getElementById("article_container").appendChild(article);
+      }
+    }).catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
+  function clickArticle(bookId) {
+    console.log("###index: " + bookId);
+    window.location.href = "http://localhost:8080/books/" + bookId;
+  }
+
+  function clickPrevious() {
+    var pageMain = document.getElementById("page-main")
+    const urlParams = new URL(location.href).searchParams;
+    var pageNumber = Number(urlParams.get('pageNumber'));
+    var pageIndex = Number(pageMain.dataset["pageindex"]);
+
+    if (pageNumber != null && pageNumber != 0) {
+      if (pageNumber == (pageIndex * 3 + 1)) {
+        //pageMain.dataset["pageindex"]--;
+        pageMain.dataset["pageindex"] = Number(pageMain.dataset["pageindex"]) - 1;
+      }
+      window.location.href = "http://localhost:8080/?pageNumber=" + (pageNumber - 1);
+    }
+  }
+
+  function clickNext() {
+    var pageMain = document.getElementById("page-main")
+    const urlParams = new URL(location.href).searchParams;
+    var allPageCount = pageMain.dataset["allpagecount"];
+
+    var pageNumber = Number(urlParams.get('pageNumber'));
+
+    if (pageNumber == null) {
+      pageNumber = 0;
+    }
+    if (allPageCount > (pageNumber + 1)) {
+      var pageIndex = pageMain.dataset["pageindex"];
+
+      if ((pageIndex * 3 + 3) < (pageNumber + 1)) {
+        //pageMain.dataset["pageIndex"]++;
+        pageMain.dataset["pageindex"] = Number(pageMain.dataset["pageindex"]) + 1;
+      }
+      window.location.href = "http://localhost:8080/?pageNumber=" + (pageNumber + 1);
+    }
+  }
+
+  function logout() {
+    var loginVar = document.getElementById("login_navbar")
+    loginVar.textContent = "Login";
+    loginVar.setAttribute("href", "/Login");
+
+    fetch("http://localhost:8080/api/logout", {
+      method: "POST",
+    }).then((response) => {
+          console.log("response: " + response)
+          setCookie("JSESSIONID", '', 0);
+        }
+    ).catch((error) => {
+      console.error('Error:', error);
+    });
+  }
+
+  function setCookie(cName, cValue, cDay) {
+    var expire = new Date();
+    expire.setDate(expire.getDate() + cDay);
+    cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
+    if (typeof cDay != 'undefined') {
+      cookies += ';expires=' + expire.toGMTString() + ';';
+    }
+    document.cookie = cookies;
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="582cfd9b-333d-490f-93b0-67c169c4e0a7" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../RedisPractice/src/main/java/com/example/RedisPractice/Person.java" beforeDir="false" afterPath="$PROJECT_DIR$/../RedisPractice/src/main/java/com/example/RedisPractice/Person.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/devkdt/devBook/DevBookApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/devkdt/devBook/DevBookApplication.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Kotlin Class" />
+        <option value="JUnit5 Test Class" />
+        <option value="HTML File" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FormatOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="OptimizeOnSaveOptions">
+    <option name="myRunOnSave" value="true" />
+  </component>
+  <component name="ProjectId" id="2JZYBlteABcFJZphWQqsesgFXTY" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+    <option name="showMembers" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kimkiwoong/study/dev-Book&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.36649215&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;e284a7577f75cd93c089621f3e2ec05f&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="devkdt.devBook.book.dto" />
+      <recent name="devkdt.devBook.dto" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/user" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/admin" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/src" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources/static" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/src" />
+      <recent name="$PROJECT_DIR$/src/main/resources/static/prior" />
+      <recent name="$PROJECT_DIR$/src/main/resources/templates" />
+      <recent name="$PROJECT_DIR$/src/main/java/devkdt/devBook/global" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="devkdt.devBook.evaluation.domain" />
+      <recent name="devkdt.devBook.service" />
+      <recent name="devkdt.devBook.entity" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="devkdt.devBook.ui" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.DevBookApplication">
+    <configuration name="BookServiceTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="dev-Book.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="devkdt.devBook.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="devkdt.devBook.service" />
+      <option name="MAIN_CLASS_NAME" value="devkdt.devBook.service.BookServiceTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="DB_PASSWORD" value="" />
+        <env name="DB_URL" value="jdbc:h2:tcp://localhost/~/H2DB/dev-book" />
+        <env name="DB_USERNAME" value="sa" />
+        <env name="SLACK_TOKEN" value="xoxb-4601048768480-4579829374148-hwpsvcdi7YvubSXAXJvbnzXN" />
+        <env name="SLACK_CHANNEL" value="#test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookServiceTest.addEvaluation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dev-Book.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="devkdt.devBook.joinRequest.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="devkdt.devBook.service" />
+      <option name="MAIN_CLASS_NAME" value="devkdt.devBook.service.BookServiceTest" />
+      <option name="METHOD_NAME" value="addEvaluation" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="DB_PASSWORD" value="" />
+        <env name="DB_URL" value="jdbc:h2:tcp://localhost/~/H2DB/dev-book" />
+        <env name="DB_USERNAME" value="sa" />
+        <env name="SLACK_TOKEN" value="xoxb-4601048768480-4579829374148-hwpsvcdi7YvubSXAXJvbnzXN" />
+        <env name="SLACK_CHANNEL" value="#test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookServiceTest.addEvaluationWithMember" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dev-Book.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="devkdt.devBook.joinRequest.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="devkdt.devBook.service" />
+      <option name="MAIN_CLASS_NAME" value="devkdt.devBook.service.BookServiceTest" />
+      <option name="METHOD_NAME" value="addEvaluationWithMember" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookServiceTest.detailPage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dev-Book.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="devkdt.devBook.joinRequest.application.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="devkdt.devBook.service" />
+      <option name="MAIN_CLASS_NAME" value="devkdt.devBook.service.BookServiceTest" />
+      <option name="METHOD_NAME" value="detailPage" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="DB_PASSWORD" value="" />
+        <env name="DB_URL" value="jdbc:h2:tcp://localhost/~/H2DB/dev-book" />
+        <env name="DB_USERNAME" value="sa" />
+        <env name="SLACK_TOKEN" value="xoxb-4601048768480-4579829374148-hwpsvcdi7YvubSXAXJvbnzXN" />
+        <env name="SLACK_CHANNEL" value="#test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BookServiceTest.multiThreadEvaluationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dev-Book.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="devkdt.devBook.service.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="devkdt.devBook.service" />
+      <option name="MAIN_CLASS_NAME" value="devkdt.devBook.service.BookServiceTest" />
+      <option name="METHOD_NAME" value="multiThreadEvaluationTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="DB_PASSWORD" value="" />
+        <env name="DB_URL" value="jdbc:h2:tcp://localhost/~/H2DB/dev-book" />
+        <env name="DB_USERNAME" value="sa" />
+        <env name="SLACK_TOKEN" value="xoxb-4601048768480-4579829374148-hwpsvcdi7YvubSXAXJvbnzXN" />
+        <env name="SLACK_CHANNEL" value="#test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EvaluationRepositoryTest.existsTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="dev-Book.test" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="devkdt.devBook.evaluation.domain.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="devkdt.devBook.evaluation.domain" />
+      <option name="MAIN_CLASS_NAME" value="devkdt.devBook.evaluation.domain.EvaluationRepositoryTest" />
+      <option name="METHOD_NAME" value="existsTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="DB_PASSWORD" value="" />
+        <env name="DB_URL" value="jdbc:h2:tcp://localhost/~/H2DB/dev-book" />
+        <env name="DB_USERNAME" value="sa" />
+        <env name="SLACK_TOKEN" value="xoxb-4601048768480-4579829374148-hwpsvcdi7YvubSXAXJvbnzXN" />
+        <env name="SLACK_CHANNEL" value="#test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="DB_PASSWORD" value="" />
+        <env name="DB_URL" value="jdbc:h2:tcp://localhost/~/H2DB/dev-book" />
+        <env name="DB_USERNAME" value="sa" />
+        <env name="SLACK_TOKEN" value="xoxb-4601048768480-4579829374148-hwpsvcdi7YvubSXAXJvbnzXN" />
+        <env name="SLACK_CHANNEL" value="#test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DevBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <option name="ACTIVE_PROFILES" />
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <envs>
+        <env name="DB_PASSWORD" value="" />
+        <env name="DB_URL" value="jdbc:h2:tcp://localhost/~/H2DB/dev-book" />
+        <env name="DB_USERNAME" value="sa" />
+        <env name="MYSQL_PASSWORD" value="1234567890" />
+        <env name="MYSQL_URL" value="jdbc:mysql://127.0.0.1:3306/dev_book" />
+        <env name="MYSQL_USERNAME" value="root" />
+        <env name="SLACK_CHANNEL" value="#test" />
+        <env name="SLACK_TOKEN" value="xoxb-4601048768480-4579829374148-hwpsvcdi7YvubSXAXJvbnzXN" />
+      </envs>
+      <option name="SPRING_BOOT_MAIN_CLASS" value="devkdt.devBook.DevBookApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="JUnit.BookServiceTest" />
+      <item itemvalue="JUnit.BookServiceTest.multiThreadEvaluationTest" />
+      <item itemvalue="JUnit.EvaluationRepositoryTest.existsTest" />
+      <item itemvalue="JUnit.BookServiceTest.detailPage" />
+      <item itemvalue="JUnit.BookServiceTest.addEvaluation" />
+      <item itemvalue="JUnit.BookServiceTest.addEvaluationWithMember" />
+      <item itemvalue="Spring Boot.DevBookApplication" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.BookServiceTest.multiThreadEvaluationTest" />
+        <item itemvalue="JUnit.BookServiceTest.addEvaluation" />
+        <item itemvalue="JUnit.EvaluationRepositoryTest.existsTest" />
+        <item itemvalue="JUnit.BookServiceTest.addEvaluationWithMember" />
+        <item itemvalue="JUnit.BookServiceTest.detailPage" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="582cfd9b-333d-490f-93b0-67c169c4e0a7" name="Changes" comment="" />
+      <created>1672286939004</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1672286939004</updated>
+      <workItem from="1672286940181" duration="8467000" />
+      <workItem from="1672298896714" duration="29111000" />
+      <workItem from="1672647662825" duration="139000" />
+      <workItem from="1672734613057" duration="2759000" />
+      <workItem from="1672745920877" duration="7195000" />
+      <workItem from="1672756848322" duration="2139000" />
+      <workItem from="1672800677367" duration="2000" />
+      <workItem from="1672807214850" duration="2450000" />
+      <workItem from="1672909908718" duration="492000" />
+      <workItem from="1672912026887" duration="690000" />
+      <workItem from="1673002896228" duration="6779000" />
+      <workItem from="1673016718319" duration="576000" />
+      <workItem from="1673021028588" duration="125000" />
+      <workItem from="1673057571071" duration="1315000" />
+      <workItem from="1673079818039" duration="833000" />
+      <workItem from="1673229312168" duration="521000" />
+      <workItem from="1673450430578" duration="2000" />
+      <workItem from="1673511157098" duration="227000" />
+      <workItem from="1673667212822" duration="969000" />
+      <workItem from="1673675260954" duration="2690000" />
+      <workItem from="1673678454752" duration="7058000" />
+      <workItem from="1673701068611" duration="4988000" />
+      <workItem from="1673748058354" duration="1369000" />
+      <workItem from="1673847873628" duration="718000" />
+      <workItem from="1673849570757" duration="671000" />
+      <workItem from="1673850398792" duration="2777000" />
+      <workItem from="1673855281885" duration="12000" />
+      <workItem from="1673855326104" duration="281000" />
+      <workItem from="1673855709872" duration="98000" />
+      <workItem from="1673856779823" duration="64000" />
+      <workItem from="1673857276798" duration="53000" />
+      <workItem from="1673857417298" duration="233000" />
+      <workItem from="1673877081429" duration="438000" />
+      <workItem from="1673931493657" duration="5256000" />
+      <workItem from="1673967488730" duration="316000" />
+      <workItem from="1674030974171" duration="813000" />
+      <workItem from="1674036641150" duration="255000" />
+      <workItem from="1674109642630" duration="2308000" />
+      <workItem from="1674119459790" duration="407000" />
+      <workItem from="1674122700396" duration="717000" />
+      <workItem from="1674125139595" duration="1894000" />
+      <workItem from="1674177243324" duration="103000" />
+      <workItem from="1674525450745" duration="4299000" />
+      <workItem from="1674537860956" duration="5061000" />
+      <workItem from="1674564876831" duration="684000" />
+      <workItem from="1674569445097" duration="536000" />
+      <workItem from="1674617167471" duration="486000" />
+      <workItem from="1674656568928" duration="14919000" />
+      <workItem from="1674674881842" duration="4097000" />
+      <workItem from="1674679054591" duration="456000" />
+      <workItem from="1674750622724" duration="9000" />
+      <workItem from="1674753186004" duration="203000" />
+      <workItem from="1674775683706" duration="39000" />
+      <workItem from="1675052064264" duration="527000" />
+      <workItem from="1675060357324" duration="804000" />
+      <workItem from="1675071098197" duration="451000" />
+      <workItem from="1675145341696" duration="1164000" />
+      <workItem from="1675157236061" duration="541000" />
+      <workItem from="1675210555231" duration="592000" />
+      <workItem from="1675226663989" duration="16000" />
+      <workItem from="1675437711790" duration="320000" />
+      <workItem from="1675478351025" duration="13003000" />
+      <workItem from="1675516391868" duration="4477000" />
+      <workItem from="1675588315475" duration="8000" />
+      <workItem from="1675658850455" duration="562000" />
+      <workItem from="1675663632195" duration="1133000" />
+      <workItem from="1675738016193" duration="1602000" />
+      <workItem from="1675750530007" duration="1264000" />
+      <workItem from="1675759816247" duration="100000" />
+      <workItem from="1675819284068" duration="4103000" />
+      <workItem from="1675832713137" duration="4650000" />
+      <workItem from="1675854622414" duration="10460000" />
+      <workItem from="1675912931312" duration="1381000" />
+      <workItem from="1675932495343" duration="1386000" />
+      <workItem from="1676004973562" duration="5853000" />
+      <workItem from="1676095305376" duration="2326000" />
+      <workItem from="1676123255884" duration="3211000" />
+      <workItem from="1676222775808" duration="238000" />
+      <workItem from="1676488972455" duration="3337000" />
+      <workItem from="1676513728816" duration="91000" />
+      <workItem from="1676561673867" duration="8352000" />
+      <workItem from="1676610881324" duration="2000" />
+      <workItem from="1676612137417" duration="731000" />
+      <workItem from="1676731652909" duration="17987000" />
+      <workItem from="1676751793875" duration="414000" />
+      <workItem from="1676782119565" duration="735000" />
+      <workItem from="1676814566705" duration="1134000" />
+      <workItem from="1676854267379" duration="26000" />
+      <workItem from="1676855055604" duration="192000" />
+      <workItem from="1676855265633" duration="232000" />
+      <workItem from="1676857180643" duration="127000" />
+      <workItem from="1676857924211" duration="127000" />
+      <workItem from="1676858291318" duration="4939000" />
+      <workItem from="1676894135124" duration="308000" />
+      <workItem from="1676895206239" duration="648000" />
+      <workItem from="1676905285384" duration="799000" />
+      <workItem from="1676987566058" duration="403000" />
+      <workItem from="1676987987195" duration="4000" />
+      <workItem from="1676988497901" duration="203000" />
+      <workItem from="1676988987070" duration="359000" />
+      <workItem from="1676992162262" duration="249000" />
+      <workItem from="1677145407424" duration="406000" />
+      <workItem from="1677165770537" duration="298000" />
+      <workItem from="1677210160148" duration="605000" />
+      <workItem from="1677215126299" duration="86000" />
+      <workItem from="1677309054988" duration="65000" />
+      <workItem from="1677412709803" duration="29000" />
+      <workItem from="1677598721035" duration="2751000" />
+      <workItem from="1677647841297" duration="1027000" />
+      <workItem from="1677679125143" duration="534000" />
+      <workItem from="1677759790612" duration="593000" />
+      <workItem from="1677796039131" duration="414000" />
+      <workItem from="1677820679821" duration="37000" />
+      <workItem from="1677927214953" duration="2726000" />
+      <workItem from="1678040786463" duration="3833000" />
+      <workItem from="1678079724460" duration="1084000" />
+      <workItem from="1678201887793" duration="597000" />
+      <workItem from="1678204678605" duration="501000" />
+      <workItem from="1678207980799" duration="1376000" />
+      <workItem from="1678247935589" duration="648000" />
+      <workItem from="1678550964347" duration="1158000" />
+      <workItem from="1678625515699" duration="53000" />
+      <workItem from="1678977927578" duration="917000" />
+      <workItem from="1679049399335" duration="27000" />
+      <workItem from="1679049431844" duration="227000" />
+      <workItem from="1679050423985" duration="312000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.tomcat.embed/tomcat-embed-core/9.0.71/2ec6df0f12a3b51d0d7b21dc9a0be5ced9945f5b/tomcat-embed-core-9.0.71-sources.jar!/org/apache/catalina/Context.java</url>
+          <line>60</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="devkdt.devBook.ui.UIController" memberName="bookService" />
+      </pinned-members>
+    </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
