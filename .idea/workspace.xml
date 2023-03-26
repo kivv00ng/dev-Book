@@ -19,6 +19,18 @@
       <ProjectState />
     </projectState>
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -253,6 +265,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DevBookApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="dev-Book.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="devkdt.devBook.DevBookApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DevBookApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <option name="ACTIVE_PROFILES" />
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
@@ -279,6 +298,7 @@
       <item itemvalue="JUnit.BookServiceTest.detailPage" />
       <item itemvalue="JUnit.BookServiceTest.addEvaluation" />
       <item itemvalue="JUnit.BookServiceTest.addEvaluationWithMember" />
+      <item itemvalue="Spring Boot.DevBookApplication (1)" />
       <item itemvalue="Spring Boot.DevBookApplication" />
     </list>
     <recent_temporary>
@@ -425,6 +445,7 @@
       <workItem from="1679049399335" duration="27000" />
       <workItem from="1679049431844" duration="227000" />
       <workItem from="1679050423985" duration="312000" />
+      <workItem from="1679849526027" duration="25000" />
     </task>
     <servers />
   </component>
